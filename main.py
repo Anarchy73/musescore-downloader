@@ -9,7 +9,10 @@ async def makepdf(srcs: List[str]):
     print(srcs)
     files = []
     for i in range(len(srcs)):
-        filename = f'source_{i}.svg'
+        if '.svg' in srcs[i]:
+            filename = f'source_{i}.svg'
+        elif '.png' in srcs[i]:
+            filename = f'source_{i}.png'
         response = requests.get(srcs[i], impersonate="chrome110")
         if response.status_code == 200:
             with open(filename, 'wb') as f:
