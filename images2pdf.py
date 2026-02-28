@@ -2,7 +2,6 @@ from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Image
 
 import os
 
