@@ -15,10 +15,3 @@ def create_pdf_from_svgs(svg_files, output_file):
             if svg != svg_files[-1]:
                 c.showPage()
     c.save()
-
-svg_files = [
-    "aboba.svg",
-    "aboba2.svg",
-]
-
-create_pdf_from_svgs(svg_files, "output.pdf")
