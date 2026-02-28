@@ -11,8 +11,12 @@ def create_pdf_from_files(files, output_file):
     for img in files:
         if '.svg' in img:
             drawing = svg2rlg(img)
-            drawing.scale(1, 1)
+            drawing.wrap(1, 1)
             if drawing:
+                aspect = min( page_width / drawing.width
+                            , page_height / drawing.height
+                            )
+                drawing.scale(aspect, aspect)
                 renderPDF.draw(drawing, c, 0, 0)
         elif '.png' in img:
             drawing = c.drawImage(img, 0, 0, page_width, page_height)
