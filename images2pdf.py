@@ -8,14 +8,15 @@ import os
 
 def create_pdf_from_files(files, output_file):
     c = canvas.Canvas(output_file, pagesize=A4)
+    page_width, page_height = A4
     for img in files:
         if '.svg' in img:
             drawing = svg2rlg(img)
-        elif '.png' in img:
-            drawing = Image(img)
-        if drawing:
             drawing.scale(1, 1)
-            renderPDF.draw(drawing, c, 0, 0)
-            if img != files[-1]:
-                c.showPage()
+            if drawing:
+                renderPDF.draw(drawing, c, 0, 0)
+        elif '.png' in img:
+            drawing = c.drawImage(img, 0, 0, page_width, page_height)
+        if drawing and img != files[-1]:
+            c.showPage()
     c.save()
