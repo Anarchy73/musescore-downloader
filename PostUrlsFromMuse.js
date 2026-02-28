@@ -2,7 +2,7 @@
 // @name         PostUrlsFromMuse
 // @version      2026-02-27
 // @description  Get all the sheets!
-// @author       You
+// @author       Anarchy73
 // @match        https://musescore.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        GM_xmlhttpRequest
@@ -15,13 +15,25 @@ function sleep(ms) {
     await sleep(1000);
     const elements = document.querySelectorAll('.A8huy');
     console.log(elements);
-
+    let srcs = []
     for (const element of elements){
         element.scrollIntoView({
             behavior: 'auto',
             block: 'center',
         });
         await sleep(1000);
-        console.log(element.querySelector('.MHaWn').src);
+        srcs.push(element.querySelector('.MHaWn').src);
     }
+    console.log(srcs);
+    GM_xmlhttpRequest({
+        method: "POST",
+        url: "http://localhost:8000/pdf",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(srcs),
+        onload: function(response) {
+            console.log("Данные отправлены:", response.responseText);
+        }
+    });
 })();
