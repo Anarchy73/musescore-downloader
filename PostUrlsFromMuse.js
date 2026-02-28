@@ -3,7 +3,7 @@
 // @version      2026-02-27
 // @description  Get all the sheets!
 // @author       Anarchy73
-// @match        https://musescore.com/*
+// @match        https://musescore.com/*/scores/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
