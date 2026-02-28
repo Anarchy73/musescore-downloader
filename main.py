@@ -2,6 +2,7 @@ from curl_cffi import requests
 from fastapi import FastAPI
 from typing import List
 from images2pdf import create_pdf_from_files
+import os
 app = FastAPI()
 
 @app.post("/pdf/")
@@ -18,7 +19,9 @@ async def makepdf(srcs: List[str]):
             with open(filename, 'wb') as f:
                 f.write(response.content)
             print("Файл успешно скачан!")
+            files.append(filename)
         else:
             print(f"Ошибка: {response.text[:500]}")
-        files.append(filename)
     create_pdf_from_files(files, "output.pdf")
+    for file in files:
+        os.remove(file)
