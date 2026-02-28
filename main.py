@@ -1,7 +1,7 @@
 from curl_cffi import requests
 from fastapi import FastAPI
 from typing import List
-from svg2pdf import create_pdf_from_svgs
+from images2pdf import create_pdf_from_files
 app = FastAPI()
 
 @app.post("/pdf/")
@@ -18,4 +18,4 @@ async def makepdf(srcs: List[str]):
         else:
             print(f"Ошибка: {response.text[:500]}")
         files.append(filename)
-    create_pdf_from_svgs(files, "output.pdf")
+    create_pdf_from_files(files, "output.pdf")
